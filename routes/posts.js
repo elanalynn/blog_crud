@@ -11,7 +11,6 @@ router.get('/', function(req, res, next) {
   .join('posts', 'users.id', 'posts.user_id')
   .select()
   .then(function(records){
-    console.log(records);
     res.render('posts', {
       title: 'The TMNT Blog',
       pageTitle: 'All Posts',
@@ -48,7 +47,6 @@ router.post('/', function(req, res, next) {
     image_url: req.body.image_url,
     user_id: 1
   }, 'id').then(function(data){
-    console.log(data);
     res.redirect('/posts');
   })
 });
@@ -65,12 +63,16 @@ router.get('/:id/edit', function(req, res, next) {
   });
 });
 
-router.put('/:id/edit', function(req, res, next) {
+
+// PUT
+router.post('/:id/edit', function(req, res, next) {
   console.log(req.body);
   knex('posts')
-  .where('id',req.params.id).first()
-  .select().then(function(record){
-    knex('posts').update({
+  .select()
+  .where('id', req.params.id).first()
+  .then(function(record){
+    console.log('record', record);
+    return knex('posts').update({
       title: req.body.title || record.title,
       body: req.body.body || record.body,
       image_url: req.body.image_url || record.image_url
