@@ -4,7 +4,8 @@ var knex = require('../db/knex');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.render('index');
+
+  res.render('posts', {title: "All Posts"});
 });
 
 router.get('/:id', function(req, res, next) {
