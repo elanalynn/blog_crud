@@ -13,38 +13,75 @@ router.get('/', function(req, res, next) {
   .then(function(records){
     console.log(records);
     res.render('posts', {
-      title: 'All Posts',
+      title: 'The TMNT Blog',
+      pageTitle: 'All Posts',
       posts: records
     });
   });
 });
 
-router.get('/:id', function(req, res, next) {
-  knex('posts').select().where('id', req.params.id).then(function(record){
-    res.render('posts', {
-      title: 'All Posts',
-      post: record
-    });
-  })
+router.get('/new', function(req, res, next) {
+  res.render('new', {
+    title: 'The TMNT Blog',
+    pageTitle: 'Write a New Post'
+  });
 });
 
-router.get('/new', function(req, res, next) {
-  res.render('new', {title: 'Write a New Post'});
+router.get('/:id', function(req, res, next) {
+  knex('users')
+  .join('posts', 'users.id', 'posts.user_id')
+  .select()
+  .where('posts.id',req.params.id).first()
+  .then(function(record){
+    console.log(record);
+    res.render('post', {
+      title: 'The TMNT Blog',
+      post: record
+    });
+  });
 });
 
 router.post('/', function(req, res, next) {
-  res.redirect('/');
+  knex('posts').insert({
+    title: req.body.title,
+    body: req.body.body,
+    image_url: req.body.image_url,
+    user_id: 1
+  }, 'id').then(function(data){
+    console.log(data);
+    res.redirect('/posts');
+  })
 });
 
 router.get('/:id/edit', function(req, res, next) {
-  res.render('edit', {title: 'edit'});
+  knex('posts')
+  .where('id',req.params.id).first()
+  .select()
+  .then(function(record){
+    res.render('edit', {
+      title: 'The TMNT Blog',
+      post: record
+    });
+  });
 });
 
-router.put('/:id', function(req, res, next) {
-  res.redirect('/');
+router.put('/:id/edit', function(req, res, next) {
+  console.log(req.body);
+  knex('posts')
+  .where('id',req.params.id).first()
+  .select().then(function(record){
+    knex('posts').update({
+      title: req.body.title || record.title,
+      body: req.body.body || record.body,
+      image_url: req.body.image_url || record.image_url
+    }).where('id', req.params.id);
+  }).then(function(){
+    res.redirect('/posts');
+  })
 });
 
-router.delete('/:id', function(req, res, next) {
+router.delete('/:id/delete', function(req, res, next) {
+  knex('posts').where('id', req.params.id).del();
   res.redirect('/');
 });
 

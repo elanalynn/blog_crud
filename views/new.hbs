@@ -1,2 +1,19 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<h2>{{pageTitle}}</h2>
+
+<form name="new-post-form" action="/posts" method="post">
+  <div class="row">
+    <div class="input-field col s12">
+      <label for="title">Title</label>
+      <input class="input-field col s12" name="title" type="text">
+    </div>
+    <div class="input-field col s12">
+      <label for="image_url">Image Url</label>
+      <input name="image_url" type="text">
+    </div>
+    <div class="input-field col s12">
+      <label for="body">Body</label>
+      <textarea name="body" class="materialize-textarea"></textarea>
+    </div>
+    <button type="submit" class="waves-effect waves-light btn-large">Submit</button>
+  </div>
+</form>

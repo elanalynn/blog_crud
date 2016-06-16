@@ -1,0 +1,21 @@
+<h1>{{pageTitle}}</h1>
+<p>Editing <span class="post-title-edit-form">{{post.title}}</span></p>
+
+  <form name="edit-post-form" action="/posts/{{post.id}}/edit?_method=PUT" method="post">
+    <div class="row">
+      <div class="input-field col s12">
+        <label for="title">Title</label>
+        <input class="input-field col s12" placeholder="{{post.title}}" name="title" type="text">
+      </div>
+      <div class="input-field col s12">
+        <label for="image_url">Image Url</label>
+        <input placeholder="{{post.image_url}}" name="image_url" type="text">
+      </div>
+      <div class="input-field col s12">
+        <label for="body">Body</label>
+        <textarea placeholder="{{post.body}}" name="body" class="materialize-textarea"></textarea>
+      </div>
+      <button type="submit" class="waves-effect waves-light btn-large">Submit</button>
+    </div>
+  </form>
+</div>

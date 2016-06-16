@@ -1,8 +1,12 @@
-<h1>{{title}}</h1>
+<h1>{{pageTitle}}</h1>
+<a href="/posts/new" class="waves-effect waves-light btn-large">New Post</a>
 
 {{#each posts}}
-  <a href="posts/{{this.id}}"><h3>{{this.title}}</h3></a>
-  <p>By {{this.first_name}} {{this.last_name}}</p>
+  <a href="/posts/{{this.id}}"><h3>{{this.title}}</h3></a>
+  <div class="user-info-all-posts-view">
+    <img class="user-image circle" src="{{this.image_url}}" alt="{{this.title}}" />
+    <p>By {{this.first_name}} {{this.last_name}}</p>
+  </div>
   <img class="post-image" src="{{this.image_url}}" alt="{{this.title}}" />
   <p>{{this.body}}</p>
 {{/each}}

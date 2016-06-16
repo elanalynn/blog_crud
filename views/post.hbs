@@ -1,0 +1,21 @@
+<main>
+  <a href="{{post.id}}/edit" class="waves-effect waves-light btn-large btn-edit-post">Edit</a>
+  <a href="{{post.id}}/delete" class="waves-effect waves-light btn-large btn-edit-post red">Delete</a>
+  <h1>{{post.title}}</h1>
+  <p>By {{post.first_name}} {{post.last_name}}</p>
+  <img class="post-image" src="{{post.image_url}}" alt="{{post.title}}" />
+  <p>{{post.body}}</p>
+
+  <h4>Comment on this Post</h4>
+  <form id="comment-form" class="container" action="comments/new" method="post">
+    <div class="input-field col s12">
+      <select name="user">
+        <option>Select a user</option>
+        <option>Select a user</option>
+      </select>
+      <label for="user">Select a User</label>
+    </div>
+    <textarea name="body" rows="8" cols="40"></textarea>
+    <a href="comments/new" class="waves-effect waves-light btn">Submit</a>
+  </form>
+</main>
