@@ -6,3 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
+
+.post-image {
+  max-width: 300px;
+  border-radius: 10px;
+}

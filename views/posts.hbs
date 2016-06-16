@@ -1,6 +1,8 @@
 <h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
 
 {{#each posts}}
-  {{this.title}}
+  <a href="posts/{{this.id}}"><h3>{{this.title}}</h3></a>
+  <p>By {{this.first_name}} {{this.last_name}}</p>
+  <img class="post-image" src="{{this.image_url}}" alt="{{this.title}}" />
+  <p>{{this.body}}</p>
 {{/each}}

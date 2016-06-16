@@ -7,13 +7,16 @@ router.use('/comments', comments);
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  knex('posts').select().then(function(records){
+  knex('users')
+  .join('posts', 'users.id', 'posts.user_id')
+  .select()
+  .then(function(records){
     console.log(records);
     res.render('posts', {
       title: 'All Posts',
       posts: records
     });
-  })
+  });
 });
 
 router.get('/:id', function(req, res, next) {
