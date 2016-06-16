@@ -7,19 +7,20 @@ router.use('/comments', comments);
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  knex('posts').select().then(function(rows){
+  knex('posts').select().then(function(records){
+    console.log(records);
     res.render('posts', {
       title: 'All Posts',
-      posts: rows
+      posts: records
     });
   })
 });
 
 router.get('/:id', function(req, res, next) {
-  knex('posts').select().where('id', req.params.id).then(function(row){
+  knex('posts').select().where('id', req.params.id).then(function(record){
     res.render('posts', {
       title: 'All Posts',
-      post: row
+      post: record
     });
   })
 });
